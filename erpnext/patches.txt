@@ -273,6 +273,7 @@ erpnext.patches.v14_0.france_depreciation_warning
 erpnext.patches.v14_0.clear_reconciliation_values_from_singles
 
 [post_model_sync]
+erpnext.patches.v14_0.update_posting_datetime_and_dropped_indexes
 execute:frappe.delete_doc_if_exists('Workspace', 'ERPNext Integrations Settings')
 erpnext.patches.v14_0.update_posting_datetime_and_dropped_indexes
 erpnext.patches.v14_0.rename_ongoing_status_in_sla_documents
@@ -358,12 +359,5 @@ erpnext.patches.v14_0.update_total_asset_cost_field
 erpnext.patches.v14_0.migrate_gl_to_payment_ledger
 erpnext.stock.doctype.delivery_note.patches.drop_unused_return_against_index # 2023-12-20
 erpnext.patches.v14_0.set_maintain_stock_for_bom_item
-<<<<<<< HEAD
-<<<<<<< HEAD
 execute:frappe.db.set_single_value('E Commerce Settings', 'show_actual_qty', 1)
 erpnext.patches.v14_0.delete_orphaned_asset_movement_item_records
-=======
-erpnext.patches.v14_0.update_posting_datetime_and_dropped_indexes
->>>>>>> d80ca523a4 (perf: new column posting datetime in SLE to optimize stock ledger related queries)
-=======
->>>>>>> f04676aaed (test: test cases to test clash timestamp entries)
