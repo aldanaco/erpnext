@@ -315,21 +315,11 @@
    "fieldname": "is_adjustment_entry",
    "fieldtype": "Check",
    "label": "Is Adjustment Entry"
-<<<<<<< HEAD
-=======
-  },
-  {
-   "default": "0",
-   "depends_on": "serial_and_batch_bundle",
-   "fieldname": "auto_created_serial_and_batch_bundle",
-   "fieldtype": "Check",
-   "label": "Auto Created Serial and Batch Bundle"
   },
   {
    "fieldname": "posting_datetime",
    "fieldtype": "Datetime",
    "label": "Posting Datetime"
->>>>>>> d80ca523a4 (perf: new column posting datetime in SLE to optimize stock ledger related queries)
   }
  ],
  "hide_toolbar": 1,
@@ -338,11 +328,7 @@
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
-<<<<<<< HEAD
- "modified": "2023-10-23 18:07:42.063615",
-=======
  "modified": "2024-02-07 09:18:13.999231",
->>>>>>> d80ca523a4 (perf: new column posting datetime in SLE to optimize stock ledger related queries)
  "modified_by": "Administrator",
  "module": "Stock",
  "name": "Stock Ledger Entry",
