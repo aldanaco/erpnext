@@ -273,7 +273,6 @@ erpnext.patches.v14_0.france_depreciation_warning
 erpnext.patches.v14_0.clear_reconciliation_values_from_singles
 
 [post_model_sync]
-erpnext.patches.v14_0.update_posting_datetime_and_dropped_indexes
 execute:frappe.delete_doc_if_exists('Workspace', 'ERPNext Integrations Settings')
 erpnext.patches.v14_0.update_posting_datetime_and_dropped_indexes
 erpnext.patches.v14_0.rename_ongoing_status_in_sla_documents
