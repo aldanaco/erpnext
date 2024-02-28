@@ -1,6 +1,7 @@
 // Copyright (c) 2018, Frappe Technologies Pvt. Ltd. and Contributors
 // License: GNU General Public License v3. See license.txt
 
+
 frappe.query_reports["General Ledger"] = {
 	"filters": [
 		{
@@ -15,6 +16,7 @@ frappe.query_reports["General Ledger"] = {
 			"fieldname":"finance_book",
 			"label": __("Finance Book"),
 			"fieldtype": "Link",
+			"hidden":1,
 			"options": "Finance Book"
 		},
 		{
@@ -55,6 +57,8 @@ frappe.query_reports["General Ledger"] = {
 		{
 			"fieldname":"against_voucher_no",
 			"label": __("Against Voucher No"),
+			"hidden":1,
+
 			"fieldtype": "Data",
 		},
 		{
@@ -62,6 +66,8 @@ frappe.query_reports["General Ledger"] = {
 		},
 		{
 			"fieldname":"party_type",
+			"hidden":1,
+
 			"label": __("Party Type"),
 			"fieldtype": "Autocomplete",
 			options: Object.keys(frappe.boot.party_account_types),
@@ -72,6 +78,8 @@ frappe.query_reports["General Ledger"] = {
 		{
 			"fieldname":"party",
 			"label": __("Party"),
+			"hidden":1,
+
 			"fieldtype": "MultiSelectList",
 			get_data: function(txt) {
 				if (!frappe.query_report.filters) return;
@@ -107,6 +115,7 @@ frappe.query_reports["General Ledger"] = {
 		{
 			"fieldname":"party_name",
 			"label": __("Party Name"),
+
 			"fieldtype": "Data",
 			"hidden": 1
 		},
@@ -150,6 +159,8 @@ frappe.query_reports["General Ledger"] = {
 		{
 			"fieldname":"cost_center",
 			"label": __("Cost Center"),
+			"hidden":1,
+
 			"fieldtype": "MultiSelectList",
 			get_data: function(txt) {
 				return frappe.db.get_link_options('Cost Center', txt, {
@@ -160,6 +171,8 @@ frappe.query_reports["General Ledger"] = {
 		{
 			"fieldname":"project",
 			"label": __("Project"),
+			"hidden":1,
+
 			"fieldtype": "MultiSelectList",
 			get_data: function(txt) {
 				return frappe.db.get_link_options('Project', txt, {
@@ -170,6 +183,8 @@ frappe.query_reports["General Ledger"] = {
 		{
 			"fieldname": "include_dimensions",
 			"label": __("Consider Accounting Dimensions"),
+			"hidden":1,
+
 			"fieldtype": "Check",
 			"default": 1
 		},
@@ -181,6 +196,8 @@ frappe.query_reports["General Ledger"] = {
 		{
 			"fieldname": "include_default_book_entries",
 			"label": __("Include Default FB Entries"),
+			"hidden":1,
+
 			"fieldtype": "Check",
 			"default": 1
 		},
@@ -192,11 +209,15 @@ frappe.query_reports["General Ledger"] = {
 		{
 			"fieldname": "show_net_values_in_party_account",
 			"label": __("Show Net Values in Party Account"),
+			"hidden":1,
+
 			"fieldtype": "Check"
 		},
 		{
 			"fieldname": "add_values_in_transaction_currency",
 			"label": __("Add Columns in Transaction Currency"),
+			"hidden":1,
+
 			"fieldtype": "Check"
 		},
 		{
@@ -207,6 +228,8 @@ frappe.query_reports["General Ledger"] = {
 		{
 			"fieldname": "ignore_err",
 			"label": __("Ignore Exchange Rate Revaluation Journals"),
+			"hidden":1,
+
 			"fieldtype": "Check"
 		}
 

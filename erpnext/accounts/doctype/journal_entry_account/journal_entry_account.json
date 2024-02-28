@@ -66,6 +66,7 @@
   {
    "fieldname": "balance",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Account Balance",
    "no_copy": 1,
    "oldfieldname": "balance",
@@ -94,6 +95,7 @@
   {
    "fieldname": "party_type",
    "fieldtype": "Link",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Party Type",
    "options": "DocType",
@@ -103,6 +105,7 @@
    "columns": 2,
    "fieldname": "party",
    "fieldtype": "Dynamic Link",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Party",
    "options": "party_type"
@@ -110,6 +113,7 @@
   {
    "fieldname": "party_balance",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Party Balance",
    "options": "account_currency",
    "print_hide": 1,
@@ -118,6 +122,7 @@
   {
    "fieldname": "currency_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Currency"
   },
   {
@@ -153,12 +158,14 @@
    "in_list_view": 1,
    "label": "Debit",
    "options": "account_currency",
+   "precision": "0",
    "print_hide_if_no_value": 1
   },
   {
    "bold": 1,
    "fieldname": "debit",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Debit in Company Currency",
    "no_copy": 1,
    "oldfieldname": "debit",
@@ -185,6 +192,7 @@
    "bold": 1,
    "fieldname": "credit",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Credit in Company Currency",
    "no_copy": 1,
    "oldfieldname": "credit",
@@ -201,6 +209,7 @@
   {
    "fieldname": "reference_type",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Reference Type",
    "no_copy": 1,
    "options": "\nSales Invoice\nPurchase Invoice\nJournal Entry\nSales Order\nPurchase Order\nExpense Claim\nAsset\nLoan\nPayroll Entry\nEmployee Advance\nExchange Rate Revaluation\nInvoice Discounting\nFees\nFull and Final Statement\nPayment Entry",
@@ -209,6 +218,7 @@
   {
    "fieldname": "reference_name",
    "fieldtype": "Dynamic Link",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Reference Name",
    "no_copy": 1,
@@ -219,6 +229,7 @@
    "depends_on": "eval:doc.reference_type&&!in_list(doc.reference_type, ['Expense Claim', 'Asset', 'Employee Loan', 'Employee Advance'])",
    "fieldname": "reference_due_date",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "Reference Due Date",
    "no_copy": 1
   },
@@ -235,6 +246,7 @@
   {
    "fieldname": "is_advance",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Is Advance",
    "no_copy": 1,
    "oldfieldname": "is_advance",
@@ -245,6 +257,8 @@
   {
    "fieldname": "user_remark",
    "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "in_preview": 1,
    "label": "User Remark",
    "no_copy": 1,
    "print_hide": 1
@@ -263,6 +277,7 @@
    "collapsible": 1,
    "fieldname": "accounting_dimensions_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Accounting Dimensions"
   },
   {
@@ -287,7 +302,7 @@
  "idx": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-11-23 11:44:25.841187",
+ "modified": "2024-02-28 20:30:56.079006",
  "modified_by": "Administrator",
  "module": "Accounts",
  "name": "Journal Entry Account",
