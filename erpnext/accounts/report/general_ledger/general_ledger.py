@@ -2,6 +2,7 @@
 # License: GNU General Public License v3. See license.txt
 
 
+
 from collections import OrderedDict
 
 import frappe
@@ -84,8 +85,8 @@ def validate_filters(filters, account_details):
 	if filters.from_date > filters.to_date:
 		frappe.throw(_("From Date must be before To Date"))
 
-	if filters.get("project"):
-		filters.project = frappe.parse_json(filters.get("project"))
+	# if filters.get("project"):
+	# 	filters.project = frappe.parse_json(filters.get("project"))
 
 	if filters.get("cost_center"):
 		filters.cost_center = frappe.parse_json(filters.get("cost_center"))
@@ -231,15 +232,15 @@ def get_conditions(filters):
 		filters.account = get_accounts_with_children(filters.account)
 		conditions.append("account in %(account)s")
 
-	if filters.get("cost_center"):
-		filters.cost_center = get_cost_centers_with_children(filters.cost_center)
-		conditions.append("cost_center in %(cost_center)s")
+	# if filters.get("cost_center"):
+	# 	filters.cost_center = get_cost_centers_with_children(filters.cost_center)
+	# 	conditions.append("cost_center in %(cost_center)s")
 
 	if filters.get("voucher_no"):
 		conditions.append("voucher_no=%(voucher_no)s")
 
-	if filters.get("against_voucher_no"):
-		conditions.append("against_voucher=%(against_voucher_no)s")
+	# if filters.get("against_voucher_no"):
+	# 	conditions.append("against_voucher=%(against_voucher_no)s")
 
 	if filters.get("ignore_err"):
 		err_journals = frappe.db.get_all(
@@ -275,8 +276,8 @@ def get_conditions(filters):
 
 	conditions.append("(posting_date <=%(to_date)s or is_opening = 'Yes')")
 
-	if filters.get("project"):
-		conditions.append("project in %(project)s")
+	# if filters.get("project"):
+	# 	conditions.append("project in %(project)s")
 
 	if filters.get("include_default_book_entries"):
 		if filters.get("finance_book"):
@@ -452,8 +453,8 @@ def get_accountwise_gle(filters, accounting_dimensions, gl_entries, gle_map):
 			data[key][rev_dr_or_cr] = 0
 			data[key][rev_dr_or_cr + "_in_account_currency"] = 0
 
-		if data[key].against_voucher and gle.against_voucher:
-			data[key].against_voucher += ", " + gle.against_voucher
+		# if data[key].against_voucher and gle.against_voucher:
+		# 	data[key].against_voucher += ", " + gle.against_voucher
 
 	from_date, to_date = getdate(filters.from_date), getdate(filters.to_date)
 	show_opening_entries = filters.get("show_opening_entries")
@@ -461,6 +462,10 @@ def get_accountwise_gle(filters, accounting_dimensions, gl_entries, gle_map):
 	for gle in gl_entries:
 		group_by_value = gle.get(group_by)
 		gle.voucher_type = _(gle.voucher_type)
+		gle.voucher_subtype = _(gle.voucher_subtype)
+		# gle.against_voucher_type = _(gle.against_voucher_type)
+		gle.remarks = _(gle.remarks)
+		gle.party_type = _(gle.party_type)
 
 		if gle.posting_date < from_date or (cstr(gle.is_opening) == "Yes" and not show_opening_entries):
 			if not group_by_voucher_consolidated:
@@ -487,12 +492,12 @@ def get_accountwise_gle(filters, accounting_dimensions, gl_entries, gle_map):
 					gle.get("party_type"),
 					gle.get("party"),
 				]
-				if filters.get("include_dimensions"):
-					for dim in accounting_dimensions:
-						keylist.append(gle.get(dim))
-					keylist.append(gle.get("cost_center"))
+				# if filters.get("include_dimensions"):
+				# 	for dim in accounting_dimensions:
+				# 		keylist.append(gle.get(dim))
+				# 	keylist.append(gle.get("cost_center"))
 
-				key = tuple(keylist)
+				# key = tuple(keylist)
 				if key not in consolidated_gle:
 					consolidated_gle.setdefault(key, gle)
 				else:
@@ -637,34 +642,34 @@ def get_columns(filters):
 			"options": "voucher_type",
 			"width": 180,
 		},
-		{"label": _("Against Account"), "fieldname": "against", "width": 120},
-		{"label": _("Party Type"), "fieldname": "party_type", "width": 100},
-		{"label": _("Party"), "fieldname": "party", "width": 100},
-		{"label": _("Project"), "options": "Project", "fieldname": "project", "width": 100},
+		# {"label": _("Against Account"), "fieldname": "against", "width": 120},
+		# {"label": _("Party Type"), "fieldname": "party_type", "width": 100},
+		# {"label": _("Party"), "fieldname": "party", "width": 100},
+		# {"label": _("Project"), "options": "Project", "fieldname": "project", "width": 100},
 	]
 
-	if filters.get("include_dimensions"):
-		for dim in get_accounting_dimensions(as_list=False):
-			columns.append(
-				{"label": _(dim.label), "options": dim.label, "fieldname": dim.fieldname, "width": 100}
-			)
-		columns.append(
-			{"label": _("Cost Center"), "options": "Cost Center", "fieldname": "cost_center", "width": 100}
-		)
+	# if filters.get("include_dimensions"):
+	# 	for dim in get_accounting_dimensions(as_list=False):
+	# 		columns.append(
+	# 			{"label": _(dim.label), "options": dim.label, "fieldname": dim.fieldname, "width": 100}
+	# 		)
+	# 	columns.append(
+	# 		{"label": _("Cost Center"), "options": "Cost Center", "fieldname": "cost_center", "width": 100}
+	# 	)
 
-	columns.extend(
-		[
-			{"label": _("Against Voucher Type"), "fieldname": "against_voucher_type", "width": 100},
-			{
-				"label": _("Against Voucher"),
-				"fieldname": "against_voucher",
-				"fieldtype": "Dynamic Link",
-				"options": "against_voucher_type",
-				"width": 100,
-			},
-			{"label": _("Supplier Invoice No"), "fieldname": "bill_no", "fieldtype": "Data", "width": 100},
-		]
-	)
+	# columns.extend(
+	# 	[
+	# 		{"label": _("Against Voucher Type"), "fieldname": "against_voucher_type", "width": 100},
+	# 		{
+	# 			"label": _("Against Voucher"),
+	# 			"fieldname": "against_voucher",
+	# 			"fieldtype": "Dynamic Link",
+	# 			"options": "against_voucher_type",
+	# 			"width": 100,
+	# 		},
+	# 		{"label": _("Supplier Invoice No"), "fieldname": "bill_no", "fieldtype": "Data", "width": 100},
+	# 	]
+	# )
 
 	if filters.get("show_remarks"):
 		columns.extend([{"label": _("Remarks"), "fieldname": "remarks", "width": 400}])
