@@ -15,7 +15,6 @@ from frappe.model.mapper import get_mapped_doc
 from frappe.model.naming import set_name_by_naming_series, set_name_from_naming_options
 from frappe.model.utils.rename_doc import update_linked_doctypes
 from frappe.utils import cint, cstr, flt, get_formatted_email, today
-from frappe.utils.deprecations import deprecated
 from frappe.utils.user import get_users_with_role
 
 from erpnext.accounts.party import get_dashboard_info, validate_party_accounts  # noqa
@@ -30,62 +29,103 @@ class Customer(TransactionBase):
 	from typing import TYPE_CHECKING
 
 	if TYPE_CHECKING:
-		from frappe.types import DF
-
-		from erpnext.accounts.doctype.allowed_to_transact_with.allowed_to_transact_with import (
-			AllowedToTransactWith,
-		)
+		from erpnext.accounts.doctype.allowed_to_transact_with.allowed_to_transact_with import AllowedToTransactWith
 		from erpnext.accounts.doctype.party_account.party_account import PartyAccount
-		from erpnext.selling.doctype.customer_credit_limit.customer_credit_limit import (
-			CustomerCreditLimit,
-		)
+		from erpnext.selling.doctype.customer_credit_limit.customer_credit_limit import CustomerCreditLimit
 		from erpnext.selling.doctype.sales_team.sales_team import SalesTeam
 		from erpnext.utilities.doctype.portal_user.portal_user import PortalUser
+		from frappe.types import DF
 
-		account_manager: DF.Link | None
+		academic_achievement: DF.Literal["", "\u0627\u0628\u062a\u062f\u0627\u0626\u064a", "\u0645\u062a\u0648\u0633\u0637\u0647", "\u0627\u0639\u062f\u0627\u062f\u064a\u0647", "\u062f\u0628\u0644\u0648\u0645", "\u0628\u0643\u0627\u0644\u0648\u0631\u064a\u0648\u0633", "\u062f\u0631\u0627\u0633\u0627\u062a \u0639\u0644\u064a\u0627", "\u0627\u062e\u0631\u0649"]
 		accounts: DF.Table[PartyAccount]
+		building_number: DF.Data | None
+		business_license: DF.Data | None
+		capital: DF.Data | None
+		certificate_expire_date: DF.Date | None
+		certificate_issue_date: DF.Date | None
+		city: DF.Data | None
+		civil_id_expire_date: DF.Date | None
+		civil_id_issue_date: DF.Date | None
+		civil_id_number: DF.Data | None
 		companies: DF.Table[AllowedToTransactWith]
+		company_city: DF.Data | None
+		company_income_source: DF.Data | None
+		company_name: DF.Data | None
+		company_registration_number: DF.Data | None
+		country: DF.Data | None
+		country_of_origin: DF.Data | None
 		credit_limits: DF.Table[CustomerCreditLimit]
-		customer_details: DF.Text | None
-		customer_group: DF.Link | None
 		customer_name: DF.Data
-		customer_pos_id: DF.Data | None
 		customer_primary_address: DF.Link | None
 		customer_primary_contact: DF.Link | None
-		customer_type: DF.Literal["Company", "Individual", "Proprietorship", "Partnership"]
+		customer_type: DF.Literal["\u0641\u0631\u062f", "\u0634\u0631\u0643\u0629"]
+		date_of_birth: DF.Date | None
 		default_bank_account: DF.Link | None
 		default_commission_rate: DF.Float
 		default_currency: DF.Link | None
 		default_price_list: DF.Link | None
 		default_sales_partner: DF.Link | None
 		disabled: DF.Check
+		district: DF.Data | None
+		district_number: DF.Data | None
 		dn_required: DF.Check
+		email: DF.Data | None
 		email_id: DF.ReadOnly | None
-		gender: DF.Link | None
+		employment_status: DF.Data | None
+		employment_type: DF.Data | None
+		establish_date: DF.Date | None
+		existing: DF.Data | None
+		family_name: DF.Data | None
+		father_name: DF.Data | None
+		first_name: DF.Data | None
+		fourth_name: DF.Data | None
+		full_name: DF.Data | None
+		gender: DF.Literal["", "\u0630\u0643\u0631", "\u0627\u0646\u062b\u0649"]
+		grandfather_name: DF.Data | None
+		house_no: DF.Data | None
+		id_certificate_no: DF.Data | None
 		image: DF.AttachImage | None
-		industry: DF.Link | None
 		is_frozen: DF.Check
 		is_internal_customer: DF.Check
-		language: DF.Link | None
+		issue_date: DF.Data | None
 		lead_name: DF.Link | None
 		loyalty_program: DF.Link | None
 		loyalty_program_tier: DF.Data | None
-		market_segment: DF.Link | None
+		martial_status: DF.Literal["", "\u0627\u0639\u0632\u0628", "\u0645\u062a\u0632\u0648\u062c", "\u0645\u0637\u0644\u0642/\u0645\u0637\u0644\u0642\u0647"]
 		mobile_no: DF.ReadOnly | None
+		mother_full_name: DF.Data | None
 		naming_series: DF.Literal["CUST-.YYYY.-"]
-		opportunity_name: DF.Link | None
+		national_id_expire_date: DF.Date | None
+		national_id_issue_date: DF.Date | None
+		national_id_number: DF.Data | None
+		nationality: DF.Data | None
+		other_academic_details: DF.Data | None
+		partner_name: DF.Data | None
+		passport_id: DF.Data | None
+		passport_id_expire_date: DF.Date | None
+		passport_id_issue_date: DF.Date | None
 		payment_terms: DF.Link | None
+		phone_number: DF.Data
 		portal_users: DF.Table[PortalUser]
 		primary_address: DF.Text | None
+		provence: DF.Date | None
+		province: DF.Data | None
 		represents_company: DF.Link | None
+		residence_type: DF.Literal["", "\u0645\u0644\u0643", "\u0625\u064a\u062c\u0627\u0631"]
 		sales_team: DF.Table[SalesTeam]
-		salutation: DF.Link | None
+		secondary_phone_number: DF.Data | None
+		sector: DF.Data | None
 		so_required: DF.Check
+		speciality: DF.Data | None
+		street: DF.Data | None
+		street_number: DF.Data | None
 		tax_category: DF.Link | None
 		tax_id: DF.Data | None
+		tax_number: DF.Data | None
 		tax_withholding_category: DF.Link | None
-		territory: DF.Link | None
-		website: DF.Data | None
+		taxes: DF.Data | None
+		trade_name: DF.Data | None
+		work_address: DF.Data | None
 	# end: auto-generated types
 
 	def onload(self):
@@ -125,6 +165,7 @@ class Customer(TransactionBase):
 				),
 				title=_("Note"),
 				indicator="yellow",
+				alert=True,
 			)
 
 			return new_customer_name
@@ -252,6 +293,8 @@ class Customer(TransactionBase):
 				self.db_set("customer_primary_contact", contact.name)
 				self.db_set("mobile_no", self.mobile_no)
 				self.db_set("email_id", self.email_id)
+		elif self.customer_primary_contact:
+			frappe.set_value("Contact", self.customer_primary_contact, "is_primary_contact", 1)  # ensure
 
 	def create_primary_address(self):
 		from frappe.contacts.doctype.address.address import get_address_display
@@ -262,6 +305,8 @@ class Customer(TransactionBase):
 
 			self.db_set("customer_primary_address", address.name)
 			self.db_set("primary_address", address_display)
+		elif self.customer_primary_address:
+			frappe.set_value("Address", self.customer_primary_address, "is_primary_address", 1)  # ensure
 
 	def update_lead_status(self):
 		"""If Customer created from Lead, update lead status to "Converted"
@@ -378,24 +423,6 @@ class Customer(TransactionBase):
 					frappe.bold(self.customer_name)
 				)
 			)
-
-
-@deprecated
-def create_contact(contact, party_type, party, email):
-	"""Create contact based on given contact name"""
-	first, middle, last = parse_full_name(contact)
-	doc = frappe.get_doc(
-		{
-			"doctype": "Contact",
-			"first_name": first,
-			"middle_name": middle,
-			"last_name": last,
-			"is_primary_contact": 1,
-		}
-	)
-	doc.append("email_ids", dict(email_id=email, is_primary=1))
-	doc.append("links", dict(link_doctype=party_type, link_name=party))
-	return doc.insert()
 
 
 @frappe.whitelist()
@@ -586,15 +613,14 @@ def check_credit_limit(customer, company, ignore_outstanding_sales_order=False, 
 
 
 @frappe.whitelist()
-def send_emails(args):
-	args = json.loads(args)
-	subject = _("Credit limit reached for customer {0}").format(args.get("customer"))
+def send_emails(customer, customer_outstanding, credit_limit, credit_controller_users_list):
+	if isinstance(credit_controller_users_list, str):
+		credit_controller_users_list = json.loads(credit_controller_users_list)
+	subject = _("Credit limit reached for customer {0}").format(customer)
 	message = _("Credit limit has been crossed for customer {0} ({1}/{2})").format(
-		args.get("customer"), args.get("customer_outstanding"), args.get("credit_limit")
+		customer, customer_outstanding, credit_limit
 	)
-	frappe.sendmail(
-		recipients=args.get("credit_controller_users_list"), subject=subject, message=message
-	)
+	frappe.sendmail(recipients=credit_controller_users_list, subject=subject, message=message)
 
 
 def get_customer_outstanding(
