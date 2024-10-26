@@ -19,7 +19,7 @@ def set_default_settings(args):
 			"default_company": args.get("company_name"),
 			"country": args.get("country"),
 		}
-	)
+	 )
 
 	global_defaults.save()
 

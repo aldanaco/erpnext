@@ -462,13 +462,13 @@ def install_defaults(args=None):  # nosemgrep
 def set_global_defaults(args):
 	global_defaults = frappe.get_doc("Global Defaults", "Global Defaults")
 
-	global_defaults.update(
-		{
-			"default_currency": args.get("currency"),
-			"default_company": args.get("company_name"),
-			"country": args.get("country"),
-		}
-	)
+	# global_defaults.update(
+	# 	{
+	# 		"default_currency": args.get("currency"),
+	# 		"default_company": args.get("company_name"),
+	# 		"country": args.get("country"),
+	# 	}
+	# )
 
 	global_defaults.save()
 
