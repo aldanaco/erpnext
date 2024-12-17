@@ -1,3 +1,4 @@
+from frappe import whitelist
 app_name = "erpnext"
 app_title = "ERPNext"
 app_publisher = "Frappe Technologies Pvt. Ltd."
@@ -637,7 +638,10 @@ global_search_doctypes = {
 additional_timeline_content = {
 	"*": ["erpnext.telephony.doctype.call_log.call_log.get_linked_call_logs"]
 }
-
+def before_request():
+    frappe.local.response.headers["Access-Control-Allow-Origin"] = "*"
+    frappe.local.response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+    frappe.local.response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
 
 extend_bootinfo = [
 	"erpnext.support.doctype.service_level_agreement.service_level_agreement.add_sla_doctypes",
